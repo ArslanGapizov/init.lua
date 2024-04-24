@@ -4,6 +4,7 @@ Prerequsites:
 
 ```bash
     brew install ripgrep
+```
 
 ```bash
     choco install ripgrep
