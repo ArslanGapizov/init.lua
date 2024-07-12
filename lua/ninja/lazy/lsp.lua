@@ -29,6 +29,7 @@ return {
         "tsserver",
         "powershell_es",
         "gopls",
+        "sqls",
       },
       handlers = {
         function(server_name) -- default handler (optional)
@@ -43,9 +44,28 @@ return {
             capabilities = capabilities,
             settings = {
               Lua = {
-				        runtime = { version = "Lua 5.1" },
+                runtime = { version = "Lua 5.1" },
                 diagnostics = {
                   globals = { "vim", "it", "describe", "before_each", "after_each" },
+                }
+              }
+            }
+          }
+        end,
+
+        ["sqls"] = function()
+          local lspconfig = require("lspconfig")
+          lspconfig.sqls.setup {
+            on_attach = function(client, bufnr)
+              require('sqls').on_attach(client, bufnr)
+            end,
+            settings  = {
+              sqls = {
+                connections = {
+                  {
+                    driver = 'postgresql',
+                    dataSourceName = 'host=127.0.0.1 port=5432 user=postgres password=Welcome1234! dbname=greenlight sslmode=disable',
+                  }
                 }
               }
             }
@@ -69,9 +89,9 @@ return {
         ["<C-Space>"] = cmp.mapping.complete(),
       }),
       sources = cmp.config.sources({
-       { name = 'nvim_lsp' },
-       { name = 'luasnip' },
-       { name = 'buffer' },
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+        { name = 'buffer' },
       })
     })
 
@@ -88,4 +108,3 @@ return {
     })
   end
 }
-
