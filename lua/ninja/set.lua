@@ -10,3 +10,4 @@ vim.opt.smartindent = true
 
 vim.opt.scrolloff = 8
 
+vim.opt.autoread = true

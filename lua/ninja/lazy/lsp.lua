@@ -30,6 +30,7 @@ return {
         "powershell_es",
         "gopls",
         "sqls",
+        "eslint",
       },
       handlers = {
         function(server_name) -- default handler (optional)
